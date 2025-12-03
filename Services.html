@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Our Services - Al Abbadi Consulting LLC</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+    <style>
+        :root {
+            --main-navy: #0b1736;
+            --accent-blue: #1f4f8f;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: var(--main-navy);
+        }
+
+        .navbar-brand,
+        .nav-link {
+            color: #fff !important;
+            font-weight: 500;
+        }
+
+        .nav-link.active {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        /* HERO SECTION */
+        .page-hero {
+            background: radial-gradient(circle at top left, var(--accent-blue), var(--main-navy));
+            color: white;
+            padding: 90px 0 60px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-hero-title {
+            font-size: 2.3rem;
+            font-weight: 600;
+        }
+
+        /* ARCH ICONS */
+        .service-arch {
+            width: 150px;
+            height: 150px;
+            background-color: #e8f0ff;
+            border-radius: 80px 80px 0 0;
+            border: 8px solid #bfd3f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            color: #1f3a67;
+            margin: 0 auto;
+        }
+
+        .service-text {
+            font-size: 1rem;
+            color: #2f3a51;
+            line-height: 1.6rem;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+
+        <!-- LOGO -->
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <img src="assets/logobare.png" alt="Logo" style="height:42px; margin-right:10px;">
+            Al Abbadi Consulting LLC
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="WhoWeAre.html">Who We Are</a></li>
+                <li class="nav-item"><a class="nav-link active" href="Services.html">Our Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="Contactus.html">Contact Us</a></li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+    <h1 class="page-hero-title">Our Services</h1>
+</section>
+
+<!-- SERVICES SECTION -->
+<section class="services-section py-5">
+    <div class="container">
+
+        <div class="row text-center justify-content-center">
+
+            <!-- Human Resources -->
+            <div class="col-md-4 mb-5">
+                <div class="service-arch mb-3">
+                    <i class="fa-solid fa-gears"></i>
+                </div>
+                <h4 class="fw-bold">Human Resources Consulting</h4>
+                <p class="service-text mt-3">
+                    Our areas of expertise include Strategic HR, Organization, Rewards, Talent Acquisition,
+                    Talent Development, Talent Retention, and Change Management.
+                </p>
+            </div>
+
+            <!-- Medical Devices -->
+            <div class="col-md-4 mb-5">
+                <div class="service-arch mb-3">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+                <h4 class="fw-bold">Medical Devices Consulting</h4>
+                <p class="service-text mt-3">
+                    We partner with hospitals to drive insight-driven equipment planning and purchasing 
+                    that boosts operational efficiency, clinical performance, and long-term value.
+                </p>
+            </div>
+
+            <!-- Organizational Excellence -->
+            <div class="col-md-4 mb-5">
+                <div class="service-arch mb-3">
+                    <i class="fa-regular fa-gem"></i>
+                </div>
+                <h4 class="fw-bold">Organizational Excellence</h4>
+                <p class="service-text mt-3">
+                    We support organizations in Excellence Awards Readiness, Policy Development,
+                    Process Simplification, Digital Enablement, Risk Management, and Customer Experience.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
