@@ -25,9 +25,85 @@
             color: #1a1a1a;
         }
 
+        /* Fade-in animation for everything */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger animations for cards */
+        .fade-in-stagger {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .fade-in-stagger.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-stagger:nth-child(1).visible { transition-delay: 0.15s; }
+        .fade-in-stagger:nth-child(2).visible { transition-delay: 0.3s; }
+        .fade-in-stagger:nth-child(3).visible { transition-delay: 0.45s; }
+        .fade-in-stagger:nth-child(4).visible { transition-delay: 0.6s; }
+
+        /* Remove old animations */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Stagger animations */
+        .fade-in-delay-1 {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-in 0.2s forwards;
+        }
+
+        .fade-in-delay-2 {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-in 0.4s forwards;
+        }
+
+        .fade-in-delay-3 {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-in 0.6s forwards;
+        }
+
+        .fade-in-delay-4 {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-in 0.8s forwards;
+        }
+
+        /* Slide up animation */
+        .slide-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 0.8s ease-out forwards;
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* Navbar */
         .navbar {
             background-color: var(--main-navy);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .navbar-brand,
@@ -41,22 +117,53 @@
             text-underline-offset: 4px;
         }
 
-        /* Hero Section */
+        /* Hero Section with Background Image */
         .hero {
-            background: radial-gradient(circle at top left, var(--accent-blue), var(--main-navy));
+            position: relative;
             color: #ffffff;
             padding: 110px 0 100px 0;
+            min-height: 85vh;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/stockmainimage.jpg') center/cover no-repeat fixed;
+            z-index: 0;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(11, 23, 54, 0.92) 0%, rgba(31, 79, 143, 0.88) 100%);
+            z-index: 1;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
         }
 
         .hero-title {
             font-size: 2.6rem;
             font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .hero-tagline {
             font-size: 1.2rem;
             margin-top: 10px;
-            opacity: 0.9;
+            opacity: 0.95;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
 
         .hero-subtext {
@@ -64,10 +171,12 @@
             font-size: 1rem;
             max-width: 540px;
             opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
 
         .badge-pill {
             border-radius: 999px;
+            backdrop-filter: blur(10px);
         }
 
         /* Section titles */
@@ -87,12 +196,29 @@
             border: 1px solid #e0e4f0;
             background-color: #ffffff;
             transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+            backdrop-filter: blur(10px);
+            overflow: hidden;
         }
 
         .info-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
             border-color: var(--accent-blue);
+        }
+
+        .hero .info-card {
+            background-color: rgba(255, 255, 255, 0.98);
+        }
+
+        .card-accent-bar {
+            height: 4px;
+            width: 100%;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
         }
 
         .info-icon {
@@ -107,10 +233,34 @@
             color: var(--accent-blue);
         }
 
+        /* Services section with video background */
+        .services-section {
+            position: relative;
+            overflow: hidden;
+            padding: 60px 0;
+        }
+
+        .services-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+            opacity: 1;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .services-section .container {
+            position: relative;
+            z-index: 1;
+        }
+
         /* Stats strip */
         .stats-strip {
             background-color: var(--light-bg);
-            padding: 30px 0;
+            padding: 60px 0;
         }
 
         .stat-number {
@@ -124,6 +274,78 @@
             text-transform: uppercase;
             letter-spacing: 0.06em;
             color: #6c6f80;
+        }
+
+        /* Sample Clients Section */
+        .clients-section {
+            background-color: #f8f9fc;
+            padding: 60px 0;
+        }
+
+        .clients-section h2 {
+            color: var(--main-navy);
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .clients-section .subtitle {
+            text-align: center;
+            color: #555;
+            margin-bottom: 50px;
+            font-size: 1.05rem;
+        }
+
+        .client-logos-container {
+            background-color: #ffffff;
+            border: 1px solid #e0e4f0;
+            border-radius: 12px;
+            padding: 60px 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .client-logos-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .global-trainers {
+            background-color: #e8ecf5;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .global-trainers h3 {
+            color: var(--main-navy);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .global-trainers p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Sister Company Section */
+        .sister-company {
+            background-color: #ffffff;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .sister-company p {
+            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
+
+        .sister-company img {
+            max-width: 500px;
+            width: 100%;
+            height: auto;
         }
 
         /* Footer */
@@ -148,7 +370,7 @@
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top fade-in">
     <div class="container">
 
         <a class="navbar-brand d-flex align-items-center fw-semibold" href="index.html">
@@ -193,36 +415,36 @@
         <div class="row align-items-center g-5">
 
             <div class="col-lg-7">
-                <span class="badge bg-light text-dark badge-pill px-3 py-2 mb-3">
+                <span class="badge bg-light text-dark badge-pill px-3 py-2 mb-3 fade-in">
                     Consulting • Healthcare • Organizational Excellence
                 </span>
 
-                <h1 class="hero-title">Strategic Intelligence. Trusted Results.</h1>
+                <h1 class="hero-title fade-in">Strategic Intelligence. Trusted Results.</h1>
 
-                <p class="hero-tagline">
+                <p class="hero-tagline fade-in">
                     Partnering with organizations to unlock potential today and build resilience for tomorrow.
                 </p>
 
-                <p class="hero-subtext">
+                <p class="hero-subtext fade-in">
                     With more than 20 years of experience, Al Abbadi Consulting LLC supports healthcare
                     and related industries across the Middle East and Africa through tailored consulting,
                     operational transformation and human capital excellence.
                 </p>
 
-                <div class="mt-4 d-flex flex-wrap gap-3">
-                    <a href="contact.html" class="btn btn-light btn-lg px-4">Contact us</a>
-                    <a href="who-we-are.html" class="btn btn-outline-light btn-lg px-4">Learn more</a>
+                <div class="mt-4 d-flex flex-wrap gap-3 fade-in">
+                    <a href="Contactus.html" class="btn btn-light btn-lg px-4">Contact us</a>
+                    <a href="WhoWeAre.html" class="btn btn-outline-light btn-lg px-4">Learn more</a>
                 </div>
             </div>
 
-            <div class="col-lg-5">
+            <div class="col-lg-5 fade-in">
                 <div class="info-card p-4 bg-white text-dark">
-                    <h5 class="mb-3">At a glance</h5>
+                    <h5 class="mb-3 fade-in">At a glance</h5>
                     <ul class="list-unstyled small mb-0">
-                        <li class="mb-2">• 20+ years of consulting experience</li>
-                        <li class="mb-2">• 30+ projects delivered</li>
-                        <li class="mb-2">• Middle East & Africa focus</li>
-                        <li>• Expertise in HR, Medical Devices, Organizational Excellence</li>
+                        <li class="mb-2 fade-in">• 20+ years of consulting experience</li>
+                        <li class="mb-2 fade-in">• 30+ projects delivered</li>
+                        <li class="mb-2 fade-in">• Middle East & Africa focus</li>
+                        <li class="fade-in">• Expertise in HR, Medical Devices, Organizational Excellence</li>
                     </ul>
                 </div>
             </div>
@@ -234,35 +456,47 @@
 <!-- WHY US PREVIEW -->
 <section class="py-5">
     <div class="container">
-        <h2 class="section-title">Why organizations partner with us</h2>
-        <p class="section-subtitle">
+        <h2 class="section-title fade-in">Why organizations partner with us</h2>
+        <p class="section-subtitle fade-in">
             A trusted partner for leaders who want strategic clarity, measurable value
             and sustainable performance improvement.
         </p>
 
         <div class="row g-4 mt-3">
 
-            <div class="col-md-4">
-                <div class="info-card h-100 p-4">
-                    <div class="info-icon mb-3"><strong>20+</strong></div>
-                    <h5 class="mb-2">Years of Expertise</h5>
-                    <p class="small mb-0">Decades of hands-on experience across healthcare, telematics and government sectors.</p>
+            <div class="col-md-4 fade-in-stagger">
+                <div class="info-card h-100">
+                    <div class="card-accent-bar" style="background-color: #1f4f8f;"></div>
+                    <img src="assets/business.jpg" alt="Years of Expertise" class="card-image">
+                    <div class="p-4">
+                        <div class="info-icon mb-3 fade-in"><strong>20+</strong></div>
+                        <h5 class="mb-2 fade-in">Years of Expertise</h5>
+                        <p class="small mb-0 fade-in">Decades of hands-on experience across healthcare, telematics and government sectors.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="info-card h-100 p-4">
-                    <div class="info-icon mb-3"><strong>30+</strong></div>
-                    <h5 class="mb-2">Projects Delivered</h5>
-                    <p class="small mb-0">Proven track record driving transformation, efficiency and performance improvements.</p>
+            <div class="col-md-4 fade-in-stagger">
+                <div class="info-card h-100">
+                    <div class="card-accent-bar" style="background-color: #5b9bd5;"></div>
+                    <img src="assets/business-teamwork.jpg" alt="Projects Delivered" class="card-image">
+                    <div class="p-4">
+                        <div class="info-icon mb-3 fade-in"><strong>30+</strong></div>
+                        <h5 class="mb-2 fade-in">Projects Delivered</h5>
+                        <p class="small mb-0 fade-in">Proven track record driving transformation, efficiency and performance improvements.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="info-card h-100 p-4">
-                    <div class="info-icon mb-3"><strong>MEA</strong></div>
-                    <h5 class="mb-2">Regional Understanding</h5>
-                    <p class="small mb-0">Deep insight into Middle East and Africa operations, challenges and opportunities.</p>
+            <div class="col-md-4 fade-in-stagger">
+                <div class="info-card h-100">
+                    <div class="card-accent-bar" style="background-color: #c5a76a;"></div>
+                    <img src="assets/business-team.jpg" alt="Regional Understanding" class="card-image">
+                    <div class="p-4">
+                        <div class="info-icon mb-3 fade-in"><strong>MEA</strong></div>
+                        <h5 class="mb-2 fade-in">Regional Understanding</h5>
+                        <p class="small mb-0 fade-in">Deep insight into Middle East and Africa operations, challenges and opportunities.</p>
+                    </div>
                 </div>
             </div>
 
@@ -270,36 +504,42 @@
     </div>
 </section>
 
-<!-- SERVICES PREVIEW -->
-<section class="py-5 bg-light">
+<!-- SERVICES PREVIEW WITH VIDEO BACKGROUND -->
+<section class="services-section bg-light">
+    <video autoplay muted loop playsinline class="services-video-bg">
+        <source src="assets/bkvid.mp4" type="video/mp4">
+    </video>
+    
     <div class="container">
-        <h2 class="section-title">Core Consulting Services</h2>
-        <p class="section-subtitle">Integrated support across human capital, medical devices and organizational excellence.</p>
+        <div class="fade-in" style="background-color: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 14px; margin-bottom: 30px;">
+            <h2 class="section-title">Core Consulting Services</h2>
+            <p class="section-subtitle">Integrated support across human capital, medical devices and organizational excellence.</p>
+        </div>
 
         <div class="row g-4 mt-3">
 
-            <div class="col-md-4">
+            <div class="col-md-4 fade-in-stagger">
                 <div class="info-card h-100 p-4">
-                    <h5>Human Resources Consulting</h5>
-                    <p class="small">
+                    <h5 class="fade-in">Human Resources Consulting</h5>
+                    <p class="small fade-in">
                         Strategic HR, organization design, rewards, talent development, retention and change management.
                     </p>
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 fade-in-stagger">
                 <div class="info-card h-100 p-4">
-                    <h5>Medical Devices Consulting</h5>
-                    <p class="small">
+                    <h5 class="fade-in">Medical Devices Consulting</h5>
+                    <p class="small fade-in">
                         Insight-driven equipment planning and procurement that enhances efficiency and clinical value.
                     </p>
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 fade-in-stagger">
                 <div class="info-card h-100 p-4">
-                    <h5>Organizational Excellence</h5>
-                    <p class="small">
+                    <h5 class="fade-in">Organizational Excellence</h5>
+                    <p class="small fade-in">
                         Excellence readiness, policy development, process simplification, digital enablement and CX.
                     </p>
                 </div>
@@ -307,8 +547,8 @@
 
         </div>
 
-        <div class="mt-4">
-            <a href="services.html" class="btn btn-outline-primary">View all services</a>
+        <div class="mt-4 fade-in">
+            <a href="Services.html" class="btn btn-outline-primary">View all services</a>
         </div>
     </div>
 </section>
@@ -317,19 +557,48 @@
 <section class="stats-strip">
     <div class="container">
         <div class="row text-center text-md-start">
-            <div class="col-md-4 mb-3">
-                <div class="stat-number">20+</div>
-                <div class="stat-label">Years of Experience</div>
+            <div class="col-md-4 mb-3 fade-in-stagger">
+                <div class="stat-number fade-in" data-target="20">0</div>
+                <div class="stat-label fade-in">Years of Experience</div>
             </div>
-            <div class="col-md-4 mb-3">
-                <div class="stat-number">30+</div>
-                <div class="stat-label">Projects Delivered</div>
+            <div class="col-md-4 mb-3 fade-in-stagger">
+                <div class="stat-number fade-in" data-target="30">0</div>
+                <div class="stat-label fade-in">Projects Delivered</div>
             </div>
-            <div class="col-md-4">
-                <div class="stat-number">Global</div>
-                <div class="stat-label">Middle East & Africa Focus</div>
+            <div class="col-md-4 fade-in-stagger">
+                <div class="stat-number fade-in">Global</div>
+                <div class="stat-label fade-in">Middle East & Africa Focus</div>
             </div>
         </div>
+    </div>
+</section>
+
+<!-- SAMPLE CLIENTS -->
+<section class="clients-section">
+    <div class="container">
+        <h2 class="section-title fade-in">Sample Clients</h2>
+        <p class="subtitle fade-in">
+            Over the years, our trainers and consultants have successfully provided services to well known organizations in various industries
+        </p>
+
+        <div class="client-logos-container fade-in">
+            <img src="assets/client-logos-bg.png" alt="Our Valued Clients">
+        </div>
+
+        <div class="global-trainers fade-in">
+            <h3 class="fade-in">Global Trainers</h3>
+            <p class="fade-in">
+                Our trainers and consultants have provided services in Jordan, Egypt, Libya, Qatar, Oman, United Arab Emirates, Saudi Arabia, and the Netherlands.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- SISTER COMPANY -->
+<section class="sister-company">
+    <div class="container">
+        <p class="fade-in">Strategic sister company to Dunes Training & Consulting.</p>
+        <img src="assets/sister.png" alt="Al Abbadi and Dunes Partnership" class="fade-in">
     </div>
 </section>
 
@@ -337,22 +606,22 @@
 <section class="py-5">
     <div class="container">
         <div class="row align-items-center g-3">
-            <div class="col-lg-8">
-                <h2 class="section-title mb-2">Ready to discuss your next project?</h2>
-                <p class="section-subtitle">
+            <div class="col-lg-8 fade-in">
+                <h2 class="section-title mb-2 fade-in">Ready to discuss your next project?</h2>
+                <p class="section-subtitle fade-in">
                     Connect with us to explore how we can support your organization through insight,
                     alignment and execution.
                 </p>
             </div>
-            <div class="col-lg-4 text-lg-end">
-                <a href="contact.html" class="btn btn-primary btn-lg">Schedule a conversation</a>
+            <div class="col-lg-4 text-lg-end fade-in">
+                <a href="Contactus.html" class="btn btn-primary btn-lg">Schedule a conversation</a>
             </div>
         </div>
     </div>
 </section>
 
 <!-- FOOTER -->
-<footer>
+<footer class="fade-in">
     <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
         <div>© <span id="year"></span> Al Abbadi Consulting LLC, Dubai, UAE. All rights reserved.</div>
         <div>License No. 2541869.01</div>
@@ -364,6 +633,72 @@
 
 <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+    
+    // Simple navbar scroll effect
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Universal Intersection Observer for ALL fade-in elements
+    const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Add visible class immediately when element enters viewport
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px'
+    });
+
+    // Observe ALL elements with fade-in classes
+    document.querySelectorAll('.fade-in, .fade-in-stagger').forEach(el => {
+        fadeObserver.observe(el);
+    });
+
+    // Animated counter for stats
+    function animateCounter(element) {
+        const target = parseInt(element.getAttribute('data-target'));
+        const duration = 2000;
+        const increment = target / (duration / 16);
+        let current = 0;
+
+        const updateCounter = () => {
+            current += increment;
+            if (current < target) {
+                element.textContent = Math.floor(current) + '+';
+                requestAnimationFrame(updateCounter);
+            } else {
+                element.textContent = target + '+';
+            }
+        };
+
+        updateCounter();
+    }
+
+    // Stats counter observer - triggers when visible
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const statNumber = entry.target.querySelector('.stat-number[data-target]');
+                if (statNumber && statNumber.textContent === '0') {
+                    animateCounter(statNumber);
+                }
+                statsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    // Observe each stat column
+    document.querySelectorAll('.stats-strip .fade-in-stagger').forEach(el => {
+        statsObserver.observe(el);
+    });
 </script>
 
 </body>
